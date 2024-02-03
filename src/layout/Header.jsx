@@ -4,11 +4,13 @@ import useAuth from '../hooks/useAuth';
 const guestNav = [
   { to : '/', text: 'Login' },
   { to : '/register', text: 'Register' },
+  { to : '/product', text: 'Product' }
 ]
 
 const userNav = [
   { to : '/', text: 'Home' },
   { to : '/new', text: 'New Todo' },
+  { to : '/product', text: 'Product' }
 ]
 
 export default function Header() {

@@ -14,7 +14,8 @@ const guestRouter = createBrowserRouter([
     </>,
     children: [
       { index: true, element: <LoginForm /> },
-      { path: '/register', element: <RegisterForm />}
+      { path: '/register', element: <RegisterForm /> },
+      { path: '/product', element: <p>Product Page</p> } // เพิ่ม path สำหรับผลิตภัณฑ์
     ]
   }
 ])
@@ -28,7 +29,8 @@ const userRouter = createBrowserRouter([
     </>,
     children : [
       { index: true, element: <UserHome /> },
-      { path: '/new', element: <p>New Todo Form</p>}
+      { path: '/new', element: <p>New Todo Form</p> },
+      { path: '/product', element: <p>Product Page</p> } // เพิ่ม path สำหรับผลิตภัณฑ์
     ]
   }
 ])
