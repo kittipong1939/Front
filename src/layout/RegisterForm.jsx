@@ -32,62 +32,62 @@ export default function RegisterForm() {
   }
 
   return (
-    <div className="p-5 border w-4/6 min-w-[500px] mx-auto rounded mt-5 ">
-      <div className="text-3xl mb-5">Register Form</div>
-      <form className="flex flex-col gap-2" onSubmit={hdlSubmit}>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">username</span>
-          </div>
+    <div className="flex flex-col items-center justify-center h-screen">
+   
+    <div className="p-8 border rounded w-96">
+      <h2 className="text-3xl font-bold mb-4 text-center">Register Form</h2>
+      <form className="flex flex-col gap-4" onSubmit={hdlSubmit}>
+        <label className="flex flex-col">
+          <span className="text-sm font-semibold mb-1">Username</span>
           <input
             type="text"
-            className="input input-bordered w-full max-w-xs"
+            className="py-2 px-3 border rounded"
             name="username"
             value={input.username}
-            onChange={ hdlChange }
+            onChange={hdlChange}
           />
         </label>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">E-mail</span>
-          </div>
+        <label className="flex flex-col">
+          <span className="text-sm font-semibold mb-1">E-mail</span>
           <input
             type="email"
-            className="input input-bordered w-full max-w-xs"
+            className="py-2 px-3 border rounded"
             name="email"
             value={input.email}
-            onChange={ hdlChange }
+            onChange={hdlChange}
           />
         </label>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">password</span>
-          </div>
+        <label className="flex flex-col">
+          <span className="text-sm font-semibold mb-1">Password</span>
           <input
             type="password"
-            className="input input-bordered w-full max-w-xs"
+            className="py-2 px-3 border rounded"
             name="password"
-            value={ input.password }
-            onChange={ hdlChange }
+            value={input.password}
+            onChange={hdlChange}
           />
         </label>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">Confirm Password</span>
-          </div>
+        <label className="flex flex-col">
+          <span className="text-sm font-semibold mb-1">Confirm Password</span>
           <input
             type="password"
-            className="input input-bordered w-full max-w-xs"
+            className="py-2 px-3 border rounded"
             name="confirmPassword"
             value={input.confirmPassword}
-            onChange={ hdlChange }
+            onChange={hdlChange}
           />
         </label>
-        <div className="flex gap-5 ">
-          <button type="submit" className="btn btn-outline btn-info mt-7">Submit</button>
-          <button type="reset" className="btn btn-outline btn-warning mt-7">Reset</button>
+        <div className="flex gap-5">
+        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+  Submit
+</button>
+<button type="reset" className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+  Reset
+</button>
+
         </div>
       </form>
     </div>
-  );
+  </div>
+);
 }

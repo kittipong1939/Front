@@ -4,7 +4,10 @@ import RegisterForm from '../layout/RegisterForm'
 import useAuth from '../hooks/useAuth'
 import Header from '../layout/Header'
 import UserHome from '../layout/UserHome'
+import AddProductForm from '../layout/AddProductForm'
 
+import CartProduct from '../layout/CartProduct'
+import NewTodoForm from '../layout/NewTodoForm'
 const guestRouter = createBrowserRouter([
   {
     path: '/',
@@ -15,7 +18,7 @@ const guestRouter = createBrowserRouter([
     children: [
       { index: true, element: <LoginForm /> },
       { path: '/register', element: <RegisterForm /> },
-      { path: '/product', element: <p>Product Page</p> } // เพิ่ม path สำหรับผลิตภัณฑ์
+      { path: '/product', element: <AddProductForm /> } // เพิ่ม path สำหรับผลิตภัณฑ์
     ]
   }
 ])
@@ -29,8 +32,9 @@ const userRouter = createBrowserRouter([
     </>,
     children : [
       { index: true, element: <UserHome /> },
-      { path: '/new', element: <p>New Todo Form</p> },
-      { path: '/product', element: <p>Product Page</p> } // เพิ่ม path สำหรับผลิตภัณฑ์
+      { path: '/new', element: <CartProduct/> },
+      { path: '/product', element: <AddProductForm /> },
+      { path: '/todos', element: <NewTodoForm/> },// เพิ่ม path สำหรับผลิตภัณฑ์
     ]
   }
 ])

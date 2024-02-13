@@ -1,0 +1,10 @@
+.input,
+.input-bordered {
+  background-color: #656565 !important; /* ปรับสีพื้นหลังเป็นสีดำ */
+  color: #fff !important; /* ปรับสีตัวอักษรเป็นสีขาว */
+  border-color: #444 !important; /* ปรับสีเส้นขอบเป็นสีเทาเข้ม */
+}
+
+.label-text {
+  color: #000000 !important; /* ปรับสีข้อความภายใน label เป็นสีขาว */
+}
