@@ -1,0 +1,46 @@
+.update-cart-button{
+  margin-left: 20px;
+}
+/* CartPage.css */
+.cart-container {
+  
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th, .cart-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนแปลงมีความเรียบร้อย */
+}
+
+.cart-table th {
+  background-color: #f2f2f2;
+}
+
+/* เพิ่มการปรับขนาดของ div เมื่อหน้าจอมีขนาดเล็กลง */
+@media (max-width: 800px) {
+  .cart-container {
+    max-width: 90%;
+  }
+}
+.cart-items-table tr {
+  transition: opacity 0.3s ease; /* เพิ่ม transition เมื่อมีการเปลี่ยนแปลงใน opacity */
+}
+
+.cart-items {
+  width: 40%; /* กำหนดความกว้างของ cart-items เป็น 60% */
+  margin-right: 80%; /* กำหนดชิดซ้าย 20% */
+}
+
+.cart-summary{
+  width: 40%;
+  margin-left: 60%;
+  position: relative;
+  top: 90px;
+}

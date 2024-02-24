@@ -1,0 +1,370 @@
+.view-cart-button{
+  color: #0056b3;
+  text-decoration: underline; /* เพิ่มเส้นขีดใต้ */
+}
+.noproduct{
+  height: 30vh;
+  margin-top: 160px;
+  font-size: 40px;
+  font-weight: 550px;
+}
+.user-home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.category-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-button.selected {
+  background-color: #0056b3;
+}
+
+.search-container {
+  margin-right: 20px;
+}
+
+.search-container input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.search-container button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #218838;
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+}
+
+.product-title {
+  margin-top: 0;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-weight: bold;
+}
+
+.product-category {
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buy-button,
+.add-to-cart-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buy-button {
+  background-color: #003ac0;
+  color: #fff;
+}
+
+.buy-button:hover {
+  background-color: #c82333;
+}
+
+.add-to-cart-button {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.add-to-cart-button:hover {
+  background-color: #e0a800;
+}
+.product-image {
+  /* ถ้าคุณต้องการรูปภาพที่มีขนาดเท่ากันคุณสามารถใช้ CSS สำหรับการกำหนดขนาดได้ */
+  width: 100%; /* กำหนดให้รูปภาพทำเต็มกว้างในกล่องข้อมูล */
+  height: 400px; /* กำหนดให้รูปภาพทำเต็มสูงในกล่องข้อมูล */
+  object-fit: cover; /* ใช้สำหรับให้รูปภาพทำเต็มกล่องข้อมูล */
+}
+.product-item:hover {
+  box-shadow: 0 4px 80px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.cart-item{
+  max-height: 230px;
+}
+.ddd{
+  position: relative;
+  top: -160px;
+  left: 120px;
+}
+@keyframes slideRight {
+  0% {
+    opacity: 0; /* ตำแหน่งเริ่มต้น: ความโปร่งใสเท่ากับ 0 */
+    transform: translateX(100%); /* ตำแหน่งเริ่มต้น: ขยับไปทางขวาออกจากหน้าจอ */
+  }
+  100% {
+    opacity: 1; /* ตำแหน่งสุดท้าย: ความโปร่งใสเท่ากับ 1 */
+    transform: translateX(0); /* ตำแหน่งสุดท้าย: ขยับกลับมาที่ตำแหน่งเริ่มต้น */
+  }
+}
+
+
+.Add-confirmation {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: fixed;
+  top: 0%;
+  left: 1200px;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  
+  width: 400px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* เพิ่ม overflow-y: auto เพื่อให้มี scrollbar เมื่อข้อมูลเต็มหน้า */
+  animation: slideRight 0.5s ease forwards;
+  
+}
+
+.Add-confirmation p:last-child {
+  position: sticky;
+  bottom: 0px;
+  width: 400px;
+  margin-left: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.Add-confirmation p {
+  margin: 10px 0;
+}
+
+.Add-confirmation img {
+  width: 100px;
+  height: 150px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.Add-confirmation button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  margin-right: 10px;
+}
+
+.confirm-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.confirm-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  
+  background-color: #752029;
+  color: #fff;
+}
+.close-button{
+  background-color: #000000;
+  color: #fff;
+  margin-left: 280px;
+}
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.Add-confirmation.active {
+  right: 50%;
+}
+.btn-add{
+  margin-top: 270px;
+}
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.Buy-confirmation {
+  position: fixed;
+  top: 0%; /* ให้ตัว Buy-confirmation อยู่ตรงกลางตามแนวแกนตั้ง */
+  left: 37%;
+  transform: translate(-50%, -50%); /* ให้ Buy-confirmation อยู่ตรงกลางทั้งแนวนอนและแนวตั้ง */
+  width: 400px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideUp 0.3s ease forwards;
+  z-index: 9999; /* ให้มีค่า z-index สูงกว่าทุกอย่างเพื่อให้เป็นพื้นหลังหน้าจอ */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* สีดำทึบโปร่งแสง */
+  z-index: 999; /* ให้มีค่า z-index สูงกว่าทุกอย่างยกเว้น Buy-confirmation */
+  display: none; /* ซ่อนเมื่อยังไม่มีการใช้งาน */
+}
+
+.overlay.active {
+  display: block; /* แสดงเมื่อมีการใช้งาน */
+}
+
+.Buy-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Buy-img img {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.Buy-text p {
+  margin-bottom: 10px;
+}
+
+.Buy-btn {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.Buy-detail {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+}
+
+.Buy-detail img {
+  width: 300px;
+  height: 450px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.Buy-detail p {
+  margin-bottom: 10px;
+}
+
+.confirm-button, .cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.confirm-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.confirm-button:hover, .cancel-button:hover {
+  background-color: #218838;
+}
+

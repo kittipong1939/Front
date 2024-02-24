@@ -1,0 +1,50 @@
+.order-manage-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .order-list {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .order-item {
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .status {
+    font-weight: bold;
+  }
+  
+  .status.unpaid {
+    color: rgb(157, 157, 101);
+  }
+  
+  .status.success {
+    color: green;
+  }
+  
+  .status.cancelled {
+    color: red;
+  }
+  
+  .back-to-cart-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .back-to-cart-button:hover {
+    background-color: #45a049;
+  }
+  

@@ -1,6 +1,7 @@
 import useAuth from "./hooks/useAuth";
 import AppRouter from "./routes/AppRouter";
-
+import HomeUser from "./layout/Home/UserHome";
+import AllProduct from "./layout/Product/ProductAll";
 function App() {
   const {loading} = useAuth()
 
@@ -13,6 +14,10 @@ function App() {
   return (
     <div className="min-h-screen">
       <AppRouter />
+ 
+     
+      
+      
     </div>
   );
 }

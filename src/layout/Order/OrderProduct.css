@@ -1,0 +1,64 @@
+.back-to-cart-button{
+  margin-top: 10px;
+  color: #0056b3;
+  text-decoration: underline; /* เพิ่มเส้นขีดใต้ */;
+}
+.order-popup {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .order-popup h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .payment-methods label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .pay-button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .pay-button:hover {
+    background-color: #0056b3;
+  }
+  /* สีเหลืองสำหรับสถานะ UNPAID */
+.status-unpaid {
+  color: yellow;
+  font-size: 20px;
+  background-color: rgb(120, 120, 120);
+  font-weight: bold;
+}
+
+/* สีเขียวสำหรับสถานะ SUCCESS */
+.status-success {
+  color: rgb(104, 255, 104);
+  font-size: 20px;
+  background-color: rgb(120, 120, 120);
+  font-weight: bold;
+}
+
+/* สีแดงสำหรับสถานะ CANCELLED */
+.status-cancelled {
+  color: red;
+  font-size: 20px;
+  background-color: rgb(120, 120, 120);
+  font-weight: bold;
+}
+.asdd{
+  font-size: 25px;
+}

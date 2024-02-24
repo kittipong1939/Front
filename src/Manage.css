@@ -1,0 +1,154 @@
+
+ .management-product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.category-buttons1 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.category-button1 {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.category-button1.selected {
+  background-color: #0056b3;
+}
+
+.add-product-button {
+  margin-bottom: 20px;
+}
+
+.add-button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #218838;
+}
+
+.products-table {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* รักษาขนาดของเซลล์แต่ละเซลล์เป็นค่าคงที่ */
+}
+
+th, td {
+  padding: 10px;
+  text-align: center; 
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* ป้องกันการขึ้นบรรทัดใหม่ภายในเซลล์ */
+  overflow: hidden; /* ซ่อนข้อความที่เกินขอบเขตของเซลล์ */
+  text-overflow: ellipsis; /* แสดง ... เมื่อข้อความเกินขอบเขตของเซลล์ */
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.action-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #c82333;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 20px;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-confirmation, .edit-confirmation {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 450px;
+
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm-button, .cancel-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.confirm-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+.product-image1 {
+  /* ถ้าคุณต้องการรูปภาพที่มีขนาดเท่ากันคุณสามารถใช้ CSS สำหรับการกำหนดขนาดได้ */
+  width: 150px; /* กำหนดให้รูปภาพทำเต็มกว้างในกล่องข้อมูล */
+  height: 250px; /* กำหนดให้รูปภาพทำเต็มสูงในกล่องข้อมูล */
+  object-fit: cover; /* ใช้สำหรับให้รูปภาพทำเต็มกล่องข้อมูล */
+  border-radius:5%;
+  /* position: relative;
+  left: -60px; */
+}
