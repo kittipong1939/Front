@@ -171,7 +171,9 @@ export default function AllProduct() {
   };
 
   return (
-    <div className="user-home-container">
+    <div className="user-home-container bg-white dark:bg-gray-900 dark:text-white duration-200">
+      <h1 className='H11'>Book For You</h1><br />
+      <p className='P11'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, iusto.</p><br />
       <div className="category-buttons">
         <div className="search-container">
           <input
@@ -207,8 +209,8 @@ export default function AllProduct() {
               
               <h3 className="product-title">{product.name.toUpperCase()}</h3>
               <p className="product-description">{product.description}</p>
-              <p className="product-price">Price: {product.price}</p>
-              <p className="product-category">Category ID: {product.categoryId}</p>
+              <p className="product-price">Price: {product.price} บาท</p><br />
+              {/* <p className="product-category">Category ID: {product.categoryId}</p> */}
               <div className="button-group">
                 <button onClick={() => handleBuyProduct(product.id)} className="buy-button">View</button>
                 <button onClick={() => handleAddProduct(product.id)} className="add-to-cart-button">Add to Cart</button>

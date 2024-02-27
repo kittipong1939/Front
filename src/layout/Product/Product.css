@@ -1,3 +1,10 @@
+.H11{
+  font-size: 30px;
+  font-family: sans-serif;
+}
+.P11{
+  font-family: sans-serif;
+}
 .view-cart-button{
   color: #0056b3;
   text-decoration: underline; /* เพิ่มเส้นขีดใต้ */
@@ -76,6 +83,7 @@
 
 .product-title {
   margin-top: 0;
+  font-family: sans-serif;
 }
 
 .product-image {
@@ -90,6 +98,7 @@
 
 .product-price {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .product-category {

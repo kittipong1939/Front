@@ -129,9 +129,6 @@ const CartPage = () => {
     }
   };
   
-
-  
-  
   const handleConfirm = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -148,17 +145,12 @@ const CartPage = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
-  
-      // Update cartId in all cart_item
-      
-  
-      // Show the payment button
+
       setShowPaymentButton(true);
     } catch (error) {
       console.error('Error handling confirmation:', error);
     }
   };
-  
 
   const calculateTotal = () => {
     return cartItemData.reduce((acc, item) => {
@@ -181,7 +173,7 @@ const CartPage = () => {
       <div className="cart-header">
         <h1 className="cart-title">Your Cart</h1>
         <div className="cart-summary">
-          <h2 className="cart-summary-title">Cart Summary</h2>
+          <h2 className="cart-summary-title">สรุปรายการสั่งซื้อ /Order Summary</h2><br />
           <table className="cart-summary-table">
             <tbody>
               {cartData.map(item => (

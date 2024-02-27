@@ -2,7 +2,7 @@ import {createBrowserRouter, RouterProvider, Outlet} from 'react-router-dom'
 import LoginForm from '../layout/LoginForm'
 import RegisterForm from '../layout/RegisterForm'
 import useAuth from '../hooks/useAuth'
-import Header from '../layout/Header'
+import Header from '../layout/Navbar/Header'
 import UserHome from '../layout/Home/UserHome'
 import AddProductForm from '../layout/AddProductForm'
 import OrderManage from '../layout/OrderManage/OrderManage'
@@ -35,12 +35,13 @@ const userRouter = createBrowserRouter([
     </>,
     children : [
       { index: true, element: <UserHome /> },
+
       { path: '/new', element: <CartProduct/> },
       { path: '/product', element: <AddProductForm /> },
       { path: '/Mnproduct', element: <ManagementProduct /> },
       { path: '/OrderPopUp', element: <OrderPopUp /> },
       { path: '/Order', element: <OrderManage /> },
-
+        
       { path: '/todos', element: <NewTodoForm/> },// เพิ่ม path สำหรับผลิตภัณฑ์
     ]
   }

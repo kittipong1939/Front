@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
+import Logo from "../../assets/website/logo.png";
 
+import DarkMode from "./DarkMode";
 const guestNav = [
   { to: '/', text: 'Login' },
   { to: '/register', text: 'Register' },
@@ -10,7 +12,7 @@ const userNav = [
   { to: '/Search', text: 'Search' },
   { to: '/', text: 'Home' },
   { to: '/new', text: 'Cart' },
-  { to: '/todos', text: 'NewTodos' },
+
   
 ];
 
@@ -19,9 +21,10 @@ const adminNav = [
   { to: '/', text: 'Home' },
   { to: '/product', text: 'Add Product' },
   { to: '/Mnproduct', text: 'Management' },
+  
+  { to: '/Order', text: 'Order Magnagement' },
   { to: '/new', text: 'Cart' },
-  { to: '/Order', text: 'OrderMagnagement' },
-  { to: '/todos', text: 'NewTodos' },
+
 ];
 
 export default function Header() {
@@ -42,21 +45,24 @@ export default function Header() {
   };
 
   return (
-    <div className="navbar bg-base-100">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Hello, {user?.id && user.role === 'ADMIN' ? 'ADMIN' : user?.id ? user.username : 'Guest'}</a>
+    <div className="navbar bg-base-100 shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200">
+      <div className="flex-1 ml-6">
+      <img src={Logo} alt="Logo" className="w-10" />
+        <a className="btn btn-ghost text-3xl font-bold">Books</a>
+        {/* Hello, {user?.id && user.role === 'ADMIN' ? 'ADMIN' : user?.id ? user.username : 'Guest'} */}
       </div>
       
       <div className="flex-none">
+      <DarkMode />
         <ul className="menu menu-horizontal px-1">
           {finalNav.map((el) => (
             <li key={el.to}>
-              <Link to={el.to} className="text-primary hover:text-primary-dark">{el.text}</Link>
+              <Link to={el.to} className="text-black hover:text-primary-dark bg-white dark:bg-gray-900 dark:text-white duration-200">{el.text}</Link>
             </li>
           ))}
           {user?.id && (
             <li>
-              <Link to='#' onClick={handleLogout} className="text-primary hover:text-primary-dark">Logout</Link>
+              <Link to='#' onClick={handleLogout} className="text-black hover:text-primary-dark bg-white dark:bg-gray-900 dark:text-white duration-200">Logout</Link>
             </li>
           )}
         </ul>

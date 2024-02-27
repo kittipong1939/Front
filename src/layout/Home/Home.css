@@ -1,3 +1,7 @@
+.text-sm{
+  font-family: sans-serif;
+  font-size: 20px;
+}
 .offers {
     width: 90%;
     height: 50vh;

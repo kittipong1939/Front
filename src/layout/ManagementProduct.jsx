@@ -148,7 +148,7 @@ export default function ManagementProduct() {
                   <td>{product.price}</td>
                   <td>{product.categoryId}</td>
                   <td>
-                    <button onClick={() => handleEditProduct(product.id)} className="edit-button">Edit</button>
+                    {/* <button onClick={() => handleEditProduct(product.id)} className="edit-button">Edit</button> */}
                     <button onClick={() => handleDeleteProduct(product.id)} className="action-button">Delete</button>
                   </td>
                 </tr>

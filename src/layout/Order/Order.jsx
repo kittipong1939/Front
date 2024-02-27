@@ -41,17 +41,41 @@ const OrderPopup = () => {
     }
   };
 
-  const fetchCartItem = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8889/cartitem/', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setCartItems(response.data); // เก็บข้อมูล order items ที่ได้รับเข้าสู่ state
-    } catch (error) {
-      console.error('Error fetching cart items:', error);
-    }
-  };
+ const fetchCartItem = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await axios.get('http://localhost:8889/cartitem/', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const cartItems = response.data; // ข้อมูล order items
+    const products = []; // เก็บข้อมูลสินค้าที่ตรงกับ productId
+    await Promise.all(cartItems.map(async (cartItem) => {
+      try {
+        const productResponse = await axios.get(`http://localhost:8889/product/${cartItem.productId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const productData = productResponse.data;
+        products.push({
+          id: cartItem.productId,
+          name: productData.name,
+          img: productData.img,
+          description: productData.description,
+          price: productData.price,
+          categoryId: productData.categoryId,
+          quantity: cartItem.quantity, // เพิ่มข้อมูล quantity ลงในสินค้า
+          totalPrice: productData.price * cartItem.quantity // คำนวณราคาทั้งหมดของสินค้า (price * quantity)
+        });
+      } catch (error) {
+        console.error(`Error fetching product with ID ${cartItem.productId}:`, error);
+      }
+    }));
+    // ทำตามลำดับด้านบน จนกว่าจะได้ข้อมูลทุกสินค้า
+    setCartItems(products); // อัปเดต state ของ cartItems
+  } catch (error) {
+    console.error('Error fetching cart items:', error);
+  }
+};
+
 
   useEffect(() => {
     fetchOrder();
@@ -120,19 +144,18 @@ const OrderPopup = () => {
               <div>Due Date: {item.dueDate}</div>
               <div>Cart ID: {item.cartId}</div>
               <div>Status: <span className={item.status === 'UNPAID' ? 'status-unpaid' : item.status === 'SUCCESS' ? 'status-success' : 'status-cancelled'}>{item.status}</span></div>
-              {!isCancelled && cart && cart.cartItems && ( // แสดงเฉพาะหากยังไม่ยกเลิก และมีข้อมูล cart และ cartItems อยู่
+              <div className="product-list">
+                <h2>รายการสินค้า</h2>
                 <ul>
-                  {cart.cartItems
-                    .filter((cartItem) => cartItem.cartId === item.cartId)
-                    .map((cartItem) => (
-                      <li key={cartItem.id} className="cart-item">
-                        <div>Product: {cartItem.productName}</div>
-                        <div>x {cartItem.quantity}</div>
-                        <div>Price: {cartItem.price}</div>
-                      </li>
-                    ))}
+                  {cartItems.map((product) => (
+                    <li key={product.id} className="product-item">
+                      <div className="product-details">
+                        <p>{product.name}............. x {product.quantity} จำนวน ............ {product.totalPrice} บาท</p>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
-              )}
+              </div>
             </li>
           ))}
         </ul>
