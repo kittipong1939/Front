@@ -3,35 +3,35 @@ import axios from 'axios';
 import ProfileImg from '../../assets/Offer/as.png';
 import './Home.css';
 import AllProduct from '../Product/ProductAll';
-import Book1 from "../../assets/books/book.jpg";
-import Book2 from "../../assets/books/book4.jpg";
-import Book3 from "../../assets/books/book5.jpg";
+import Book1 from "../../assets/books/novel4.jpg";
+import Book2 from "../../assets/books/novel3.jpg";
+import Book3 from "../../assets/books/novel2.jpg";
 import Vector from "../../assets/website/blue-pattern.png";
 
 const ImageList = [
   {
     id: 1,
     img: Book1,
-    title: "One Piece เล่ม 49",
+    title: "เกิดชาตินี้พี่ต้องเทพ 16",
     description: "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 2,
     img: Book2,
-    title: "One Piece ภาคพิเศษ",
+    title: "โศกนาฏกรรมต่างโลกเริ่มต้นจากเดธมาร์ช เล่ม 7",
     description: "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     id: 3,
     img: Book3,
-    title: "Mashle เล่ม 11",
+    title: "โศกนาฏกรรมต่างโลกเริ่มต้นจากเดธมาร์ช เล่ม 12",
     description: "Lost Boy, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   }
 ];
 
 const UserHome = () => {
   const [imageId, setImageId] = useState(Book1);
-  const [title, setTitle] = useState("One Piece เล่ม 49");
+  const [title, setTitle] = useState("เกิดชาตินี้พี่ต้องเทพ 16");
   const [description, setDescription] = useState("lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
   const handleOrderPopup = () => {

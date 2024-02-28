@@ -31,11 +31,14 @@ const OrderPopup = () => {
   const fetchCart = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8889/cart/last', {
+      const cartResponse = await axios.get('http://localhost:8889/cart/', {
         headers: { Authorization: `Bearer ${token}` }
       });
-      const latestCart = response.data; // จะได้เป็น object ของ cart ล่าสุด
-      setCart(latestCart); // ให้ setCart เป็น object ของ cart ล่าสุด
+  
+      console.log('Cart Response:', cartResponse);
+  
+      const cartId = cartResponse.data[0].id;
+      console.log('Cart ID:', cartId); // ให้ setCart เป็น object ของ cart ล่าสุด
     } catch (error) {
       console.error('Error fetching cart:', error);
     }
@@ -44,10 +47,24 @@ const OrderPopup = () => {
  const fetchCartItem = async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await axios.get('http://localhost:8889/cartitem/', {
+    const cartResponse = await axios.get('http://localhost:8889/cart/', {
       headers: { Authorization: `Bearer ${token}` }
     });
-    const cartItems = response.data; // ข้อมูล order items
+
+    console.log('Cart Response:', cartResponse);
+
+    const cartId = cartResponse.data[0].id;
+    console.log('Cart ID:', cartId);
+
+    const cartItemResponse = await axios.get(`http://localhost:8889/cartitem/?cartId=${cartId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    console.log('Cart Item Response:', cartItemResponse);
+
+    // ใช้ method filter เพื่อค้นหา cartItem ที่มี cartId ตรงกับค่าที่ได้จากการ get cart มา
+    const cartItems = cartItemResponse.data.filter(item => item.cartId === cartId);
+
     const products = []; // เก็บข้อมูลสินค้าที่ตรงกับ productId
     await Promise.all(cartItems.map(async (cartItem) => {
       try {

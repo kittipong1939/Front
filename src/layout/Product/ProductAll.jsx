@@ -134,31 +134,51 @@ export default function AllProduct() {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem('token');
-      const maxQuantity = 3; // จำนวนสินค้าสูงสุดที่สามารถเพิ่มได้ในแต่ละครั้ง
+      const maxQuantity = 3;
+      console.log(token);
   
-      // วนลูปเพื่อสร้าง payload สำหรับการ POST request สำหรับแต่ละสินค้าในตะกร้า
+      // Check if there's an existing cart for the user
+      const existingCartResponse = await axios.get('http://localhost:8889/cart/', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      // If there's an existing cart, use it instead of creating a new one
+      let cartId;
+      if (existingCartResponse.data.length > 0) {
+        cartId = existingCartResponse.data[0].id;
+      } else {
+        // Create a new cart if no existing cart found
+        const newCartResponse = await axios.post('http://localhost:8889/cart/', { total: totalPrice }, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        cartId = newCartResponse.data.id;
+      }
+  
+      // Loop to create payloads for each item in the cart
       for (let i = 0; i < cartItems.length; i++) {
         const payload = {
-          cartId: 1, // ตั้งค่า cartId ตามที่ต้องการ
-          productId: cartItems[i].id, // เลือกสินค้าในตะกร้าที่ตำแหน่ง i
-          quantity: cartItems[i].quantity // จำนวนสินค้าที่ต้องการเพิ่มในแต่ละครั้ง
+          cartId: cartId,
+          productId: cartItems[i].id,
+          quantity: cartItems[i].quantity
         };
   
-        // ส่ง POST request ไปยังเซิร์ฟเวอร์
         const response = await axios.post('http://localhost:8889/cartitem/', payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
         console.log('Added to cart:', response.data);
       }
   
-      // เมื่อทำการเพิ่มสินค้าเรียบร้อยแล้ว
+      // Once products are successfully added
       alert('Products added successfully');
-      setAddConfirmation(true); // ตั้งค่า AddConfirmation เป็น true เมื่อสินค้าถูกเพิ่มลงในตะกร้าเรียบร้อยแล้ว
+      setAddConfirmation(true);
     } catch (error) {
       console.error('Error adding to cart:', error);
       setAddConfirmation(false);
     }
   };
+  
+  
+  
   
   
   

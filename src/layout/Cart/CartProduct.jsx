@@ -29,14 +29,30 @@ const CartPage = () => {
     const fetchCartItemData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const cartItemResponse = await axios.get('http://localhost:8889/cartitem/', {
+        const cartResponse = await axios.get('http://localhost:8889/cart/', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setCartItemData(cartItemResponse.data);
+    
+        console.log('Cart Response:', cartResponse);
+    
+        const cartId = cartResponse.data[0].id;
+        console.log('Cart ID:', cartId);
+    
+        const cartItemResponse = await axios.get(`http://localhost:8889/cartitem/?cartId=${cartId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+    
+        console.log('Cart Item Response:', cartItemResponse);
+    
+        // ใช้ method filter เพื่อค้นหา cartItem ที่มี cartId ตรงกับค่าที่ได้จากการ get cart มา
+        const cartItems = cartItemResponse.data.filter(item => item.cartId === cartId);
+    
+        setCartItemData(cartItems);
       } catch (error) {
         console.error('Error fetching cart item data:', error);
       }
     };
+    
 
     fetchCartData();
     fetchCartItemData();
@@ -95,62 +111,66 @@ const CartPage = () => {
   };
 
   const handleUpdateCart = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      
-      // Fetch the latest cart data first
-      const cartResponse = await axios.get('http://localhost:8889/cart/last', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const latestCart = cartResponse.data; // จะได้เป็น object ของ order ล่าสุด
-      setCartData([latestCart]);
-      await Promise.all(cartItemData.map(async (item) => {
-        await axios.put(`http://localhost:8889/cartitem/${item.id}`, { cartId: latestCart.id }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      }));
-      // Create the order
-      const currentDate = new Date().toISOString();
-      await axios.post('http://localhost:8889/order/', {
+  try {
+    const token = localStorage.getItem('token');
+  
+    // Fetch the latest cart data first
+    const cartResponse = await axios.get('http://localhost:8889/cart/', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    console.log('Cart Response:', cartResponse);
+
+    const cartId = cartResponse.data[0].id;
+    const userId = cartResponse.data[0].userId;
+
+    // Update total in the cart
+    await axios.put(`http://localhost:8889/cart/${cartId}`, {
+      total: calculateTotal() // Assuming calculateTotal() returns the total value
+    }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const currentDate = new Date().toISOString();
+    await axios.post('http://localhost:8889/order/', {
         dueDate: currentDate,
         status: 'UNPAID',
-        userId: 1,
-        cartId: latestCart.id // Use the id of the latest cart
-      }, {
+        userId: userId,
+        cartId: cartId 
+    }, {
         headers: { Authorization: `Bearer ${token}` }
-      });
-  
+    });
 
-      
-  
-      nav('/OrderPopUp'); // Open in a new tab
-    } catch (error) {
-      console.error('Error updating cart:', error);
-    }
-  };
-  
-  const handleConfirm = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const cartResponse = await axios.get('http://localhost:8889/cart/last', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const latestCart = cartResponse.data; // จะได้เป็น object ของ order ล่าสุด
-      setCartData([latestCart]);
-      // Fetch the latest cart data
-      const cartId = latestCart.id;
-      if (cartId) {
-        // Create cart first
-        await axios.post('http://localhost:8889/cart/', { total: calculateTotal(), userId: 1 }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-      }
+    nav('/OrderPopUp'); // Open in a new tab
+  } catch (error) {
+    console.error('Error updating cart:', error);
+  }
+};
 
-      setShowPaymentButton(true);
-    } catch (error) {
-      console.error('Error handling confirmation:', error);
-    }
-  };
+  
+  
+  // const handleConfirm = async () => {
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     const cartResponse = await axios.get('http://localhost:8889/cart/last', {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     });
+  //     const latestCart = cartResponse.data; // จะได้เป็น object ของ order ล่าสุด
+  //     setCartData([latestCart]);
+  //     // Fetch the latest cart data
+  //     const cartId = latestCart.id;
+  //     if (cartId) {
+  //       // Create cart first
+  //       await axios.post('http://localhost:8889/cart/', {  , userId: 1 }, {
+  //         headers: { Authorization: `Bearer ${token}` }
+  //       });
+  //     }
+
+  //     setShowPaymentButton(true);
+  //   } catch (error) {
+  //     console.error('Error handling confirmation:', error);
+  //   }
+  // };
 
   const calculateTotal = () => {
     return cartItemData.reduce((acc, item) => {
@@ -184,10 +204,10 @@ const CartPage = () => {
               ))}
             </tbody>
           </table>
-          <button onClick={handleConfirm} className="update-cart-button">ยืนยัน</button>
-          {showPaymentButton && (
+          {/* <button onClick={handleConfirm} className="update-cart-button">ยืนยัน</button> */}
+          {/* {showPaymentButton && ( */}
             <button onClick={handleUpdateCart} className="update-cart-button">ชำระเงิน</button>
-          )}
+          {/* // )} */}
         </div>
       </div>
       <div className="cart-items">
