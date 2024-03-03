@@ -9,10 +9,10 @@ export default function AddProductForm() {
     description: '',
     price: '',
     categoryId: '',
+    category_name: '' // Add this line
   });
 
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     // Fetch categories
     const fetchCategories = async () => {
@@ -68,8 +68,43 @@ export default function AddProductForm() {
       }
     }
   };
-
+  const handleAddCategory = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        'http://localhost:8889/product/category',
+        { category_name: formData.category_name },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(response.data);
+      if (response.status === 200) {
+        alert('Category added successfully');
+        // Clear the category_name field after successful addition
+        setFormData((prevData) => ({
+          ...prevData,
+          category_name: '',
+        }));
+      } else {
+        alert('Unexpected response: ' + response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      if (error.response) {
+        console.error('Error Response:', error.response.data);
+        alert('Error: ' + error.response.data.message);
+      } else if (error.request) {
+        console.error('No response received from the server');
+        alert('No response received from the server');
+      } else {
+        console.error('Error setting up the request:', error.message);
+        alert('Error setting up the request: ' + error.message);
+      }
+    }
+  };
   return ( 
+    <div>
     <div className="p-5 border w-4/6 min-w-[500px] mx-auto rounded mt-5">
       <div className="text-3xl mb-5">Add Product Form</div>
       <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
@@ -145,7 +180,32 @@ export default function AddProductForm() {
             Reset
           </button>
         </div>
+        
       </form>
+      
+    </div>
+    <div className="p-5 border w-4/6 min-w-[500px] mx-auto rounded mt-5">
+    <div className="text-3xl mb-5">Add Category Form</div>
+    <label className="form-control w-full max-w-xs">
+      <div className="label">
+        <span className="label-text"> Category Name:</span>
+      </div>
+      <input
+        type="text"
+        className="input input-bordered w-full max-w-xs"
+        name="category_name"
+        value={formData.category_name}
+        onChange={handleChange}
+      />
+    </label>
+    <button
+      type="button"
+      className="btn btn-outline btn-success mt-2"
+      onClick={handleAddCategory}
+    >
+      Add Category
+    </button>
+    </div>
     </div>
   );
 }

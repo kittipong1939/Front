@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../src/Manage.css'; // Import CSS file for styling
+import { useNavigate } from 'react-router-dom';
 
 export default function ManagementProduct() {
   const [products, setProducts] = useState([]);
@@ -9,7 +10,7 @@ export default function ManagementProduct() {
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
   const [editConfirmation, setEditConfirmation] = useState(null);
   const [editedProduct, setEditedProduct] = useState(null);
-
+  const nav = useNavigate();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -47,15 +48,21 @@ export default function ManagementProduct() {
 
   const handleConfirmEdit = async () => {
     try {
+      // Convert price to integer
+      const editedProductWithIntegerPrice = {
+        ...editedProduct,
+        price: parseInt(editedProduct.price) // หรือใช้ Number(editedProduct.price)
+      };
+  
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:8889/auth/edit/${editedProduct.id}`, editedProduct, {
+      await axios.put(`http://localhost:8889/product/${editedProduct.id}`, editedProductWithIntegerPrice, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log("Edited product:", editedProduct);
+      console.log("Edited product:", editedProductWithIntegerPrice);
       // Update the products state to reflect the changes
       const updatedProducts = products.map(product => {
-        if (product.id === editedProduct.id) {
-          return editedProduct;
+        if (product.id === editedProductWithIntegerPrice.id) {
+          return editedProductWithIntegerPrice;
         }
         return product;
       });
@@ -66,6 +73,9 @@ export default function ManagementProduct() {
       console.error('Error editing product:', error);
     }
   };
+  
+  
+  
 
   const handleDeleteProduct = (productId) => {
     setDeleteConfirmation(productId);
@@ -91,9 +101,7 @@ export default function ManagementProduct() {
   };
 
   const handleAddProduct = () => {
-    // Add your logic to navigate to the add product page or show the add product form
-    // This can be done using React Router or by toggling a state to show the add product form
-    // For demonstration purposes, I will simply log a message to the console
+    nav('/product');
     console.log('Add Product clicked');
   };
 
@@ -148,7 +156,7 @@ export default function ManagementProduct() {
                   <td>{product.price}</td>
                   <td>{product.categoryId}</td>
                   <td>
-                    {/* <button onClick={() => handleEditProduct(product.id)} className="edit-button">Edit</button> */}
+                    <button onClick={() => handleEditProduct(product.id)} className="edit-button">Edit</button>
                     <button onClick={() => handleDeleteProduct(product.id)} className="action-button">Delete</button>
                   </td>
                 </tr>
@@ -159,34 +167,46 @@ export default function ManagementProduct() {
       {/* Delete Confirmation Dialog */}
       {deleteConfirmation && (
         <div className="delete-confirmation">
-          <p>Are you sure you want to delete this product?</p>
+          <p>Are you sure you want to delete this product?</p><br />
+          <img src={products.find(product => product.id === deleteConfirmation)?.img} alt="Product" className="product-image" />
+             <br />
           <p>Product ID: {deleteConfirmation}</p> {/* Show the product ID */}
-          <p>Name: {products.find(product => product.id === deleteConfirmation)?.title}</p> {/* Show the product title */}
+          <p>Name: {products.find(product => product.id === deleteConfirmation)?.name}</p> {/* Show the product title */}
           <p>Description: {products.find(product => product.id === deleteConfirmation)?.description}</p> {/* Show the product description */}
           <p>Price: {products.find(product => product.id === deleteConfirmation)?.price}</p> {/* Show the product price */}
-          <p>Stock: {products.find(product => product.id === deleteConfirmation)?.stock_of_product}</p> {/* Show the product stock */}
-          <p>Category ID: {products.find(product => product.id === deleteConfirmation)?.categoryId}</p> {/* Show the product category ID */}
+          
+          <p>Category ID: {products.find(product => product.id === deleteConfirmation)?.categoryId}</p><br /> {/* Show the product category ID */}
           <button onClick={() => handleDeleteConfirmed(deleteConfirmation)} className="confirm-button">Yes</button>
           <button onClick={() => setDeleteConfirmation(null)} className="cancel-button">Cancel</button>
         </div>
       )}
       {/* Edit Confirmation Dialog */}
-      {editConfirmation && (
-        <div className="edit-confirmation">
-          <p>Edit Product:</p>
-          <p>Product ID: {editedProduct.id}</p>
-          <label>Title </label>
-          <input type="text" value={editedProduct.title} onChange={(e) => setEditedProduct({...editedProduct, title: e.target.value})} /><br />
-          <label>Detail </label>
-          <input type="text" value={editedProduct.description} onChange={(e) => setEditedProduct({...editedProduct, description: e.target.value})} /><br />
-          <label>Price </label>
-          <input type="number" value={editedProduct.price_product} onChange={(e) => setEditedProduct({...editedProduct, price_product: e.target.value})} /><br />
-          <label>Stock </label>
-          <input type="number" value={editedProduct.stock_of_product} onChange={(e) => setEditedProduct({...editedProduct, stock_of_product: e.target.value})} />
-          <button onClick={() => handleConfirmEdit()} className="confirm-button">Save</button>
-          <button onClick={() => setEditConfirmation(null)} className="cancel-button">Cancel</button>
-        </div>
-      )}
+      {/* Edit Confirmation Dialog */}
+{editConfirmation && (
+  <div className="edit-confirmation" style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "5px" }}>
+    <p>Edit Product:</p>
+    <p>Product ID: {editedProduct.id}</p>
+    <div style={{ marginBottom: "10px" }}>
+      <label>Title: </label>
+      <input type="text" value={editedProduct.name} onChange={(e) => setEditedProduct({...editedProduct, name: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
+    </div>
+    <div style={{ marginBottom: "10px" }}>
+      <label>Image URL: </label>
+      <input type="text" value={editedProduct.img} onChange={(e) => setEditedProduct({...editedProduct, img: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br/>
+    </div>
+    <div style={{ marginBottom: "10px" }}>
+      <label>Detail: </label>
+      <input type="text" value={editedProduct.description} onChange={(e) => setEditedProduct({...editedProduct, description: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
+    </div>
+    <div style={{ marginBottom: "10px" }}>
+      <label>Price: </label>
+      <input type="number" value={editedProduct.price} onChange={(e) => setEditedProduct({...editedProduct, price: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
+    </div>
+    <button onClick={() => handleConfirmEdit()} className="confirm-button" style={{ marginRight: "10px", padding: "8px 20px", borderRadius: "3px", border: "none", backgroundColor: "#4CAF50", color: "white", cursor: "pointer" }}>Save</button>
+    <button onClick={() => setEditConfirmation(null)} className="cancel-button" style={{ padding: "8px 20px", borderRadius: "3px", border: "none", backgroundColor: "#f44336", color: "white", cursor: "pointer" }}>Cancel</button>
+  </div>
+)}
+
     </div>
   );
 }

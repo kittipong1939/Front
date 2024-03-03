@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef  } from 'react';
 import axios from 'axios';
 import ProfileImg from '../../assets/Offer/as.png';
 import './Home.css';
@@ -33,9 +33,13 @@ const UserHome = () => {
   const [imageId, setImageId] = useState(Book1);
   const [title, setTitle] = useState("เกิดชาตินี้พี่ต้องเทพ 16");
   const [description, setDescription] = useState("lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+  const allProductRef = useRef(null);
+  
 
-  const handleOrderPopup = () => {
+  const handleSlide = () => {
     // Your logic for handling order popup
+    // Scroll to the AllProduct component
+    allProductRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const bgImage = {
@@ -58,7 +62,7 @@ const UserHome = () => {
               </h1>
               <p data-aos="slide-up" data-aos-duration="500" data-aos-delay="100" className="text-sm ">{description}</p>
               <div>
-                <button onClick={handleOrderPopup} className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full">Order Now</button>
+                <button onClick={handleSlide} className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full">Order Now!!</button>
               </div>
             </div>
             <div className="min-h-[450px] sm:min-h-[450px] flex justify-center items-center relative order-1 sm:order-2 ">
@@ -75,7 +79,9 @@ const UserHome = () => {
         </div>
         
       </div><br />
-      <AllProduct/>
+      <div ref={allProductRef}>
+        <AllProduct />
+      </div>
     </>
   );
 };

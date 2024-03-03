@@ -210,9 +210,9 @@ const CartPage = () => {
           {/* // )} */}
         </div>
       </div>
-      <div className="cart-items">
-        <h2 className="cart-items-title">Cart Items</h2>
-        <table className="cart-items-table">
+      <div className="cart-items ">
+        <h2 className="cart-items-title ">Cart Items</h2>
+        <table className="cart-items-table ">
           <thead>
             <tr>
               <th>Product</th>

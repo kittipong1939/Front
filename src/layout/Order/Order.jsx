@@ -150,13 +150,13 @@ const OrderPopup = () => {
   };
 
   return (
-    <div className="order-popup">
+    <div className="order-popup ">
       <h1>ชำระเงิน</h1>
-      <div className="order-details">
+      <div className="order-details ">
         <h2>Order</h2>
         <ul>
           {order.map((item) => (
-            <li key={item.id} className="order-item">
+            <li key={item.id} className="order-item ">
               <div>ID: {item.id}</div>
               <div>Due Date: {item.dueDate}</div>
               <div>Cart ID: {item.cartId}</div>

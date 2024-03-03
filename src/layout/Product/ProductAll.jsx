@@ -220,12 +220,12 @@ export default function AllProduct() {
           </button>
         ))}
       </div>
-      <div className="products-list">
+      <div className="products-list ">
         {(searchTerm ? filteredProducts : products) // ใช้ filteredProducts ถ้ามีการค้นหา มิฉะนั้นใช้ products ทั้งหมด
           .filter((product) => !selectedCategory || product.categoryId === selectedCategory)
           .map((product) => (
             <div key={product.id} className="product-item">
-              <img src={product.img} alt="Product" className="product-image" />
+              <img src={product.img} alt="Product" className="product-image " />
               
               <h3 className="product-title">{product.name.toUpperCase()}</h3>
               <p className="product-description">{product.description}</p>
