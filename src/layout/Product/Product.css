@@ -149,6 +149,7 @@
 }
 .cart-item{
   max-height: 230px;
+  margin-top:50px
 }
 .ddd{
   position: relative;
@@ -179,7 +180,8 @@
   background-color: white;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  
+  font-family: sans-serif;
+
   width: 400px;
   height: 100%;
   flex-direction: column;
@@ -294,6 +296,7 @@
   align-items: center;
   animation: slideUp 0.3s ease forwards;
   z-index: 9999; /* ให้มีค่า z-index สูงกว่าทุกอย่างเพื่อให้เป็นพื้นหลังหน้าจอ */
+  
 }
 
 .overlay {
@@ -315,6 +318,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .Buy-img img {
@@ -326,6 +330,7 @@
 
 .Buy-text p {
   margin-bottom: 10px;
+  font-family: sans-serif;
 }
 
 .Buy-btn {

@@ -31,10 +31,10 @@ const OrderManage = () => {
         <ul>
           {order.map((orderItem) => (
             <li key={orderItem.id} className="order-item">
-              <h3>Order ID: {orderItem.id}</h3>
+              <h3 className='cc'>Order ID: {orderItem.id}</h3>
               <p className={`status ${orderItem.status.toLowerCase()}`}>Status: {orderItem.status}</p>
-              <p>Due Date: {orderItem.dueDate}</p>
-              <h3>Cart ID: {orderItem.cartId}</h3>
+              <p className='cc'>Due Date: {orderItem.dueDate}</p>
+              <h3 className='cc'>Cart ID: {orderItem.cartId}</h3>
             </li>
           ))}
         </ul>

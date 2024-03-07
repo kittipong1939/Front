@@ -117,6 +117,7 @@ const OrderPopup = () => {
       // หลังจากอัปเดตสถานะ order ให้เรียก fetchOrder อีกครั้งเพื่ออัพเดตข้อมูล
       fetchOrder();
       alert('Payment completed successfully!');
+      nav('/ThankYou');
     } catch (error) {
       console.error('Error completing payment:', error);
     }
@@ -151,18 +152,18 @@ const OrderPopup = () => {
 
   return (
     <div className="order-popup ">
-      <h1>ชำระเงิน</h1>
+      <h1 className='cc'>ชำระเงิน</h1>
       <div className="order-details ">
-        <h2>Order</h2>
+        <h2 className='cc'>Order</h2>
         <ul>
           {order.map((item) => (
             <li key={item.id} className="order-item ">
-              <div>ID: {item.id}</div>
-              <div>Due Date: {item.dueDate}</div>
-              <div>Cart ID: {item.cartId}</div>
-              <div>Status: <span className={item.status === 'UNPAID' ? 'status-unpaid' : item.status === 'SUCCESS' ? 'status-success' : 'status-cancelled'}>{item.status}</span></div>
+              <div className='cc'>ID: {item.id}</div>
+              <div className='cc'>Due Date: {item.dueDate}</div>
+              <div className='cc'>Cart ID: {item.cartId}</div>
+              <div className='cc'>Status: <span className={item.status === 'UNPAID' ? 'status-unpaid' : item.status === 'SUCCESS' ? 'status-success' : 'status-cancelled'}>{item.status}</span></div>
               <div className="product-list">
-                <h2>รายการสินค้า</h2>
+                <h2 className='cc'>รายการสินค้า</h2>
                 <ul>
                   {cartItems.map((product) => (
                     <li key={product.id} className="product-item">
@@ -183,16 +184,17 @@ const OrderPopup = () => {
       </div>
       {!isCancelled && ( // แสดงเฉพาะหากยังไม่ยกเลิก
         <div className="payment-methods">
-          <label>
-            <input
+          <label className='cc' >
+            <input 
               type="radio"
               value="credit_card"
               checked={paymentMethod === 'credit_card'}
               onChange={() => handlePaymentMethodChange('credit_card')}
+              
             />
             บัตรเครดิต
           </label>
-          <label>
+          <label className='cc'>
             <input
               type="radio"
               value="cash"
@@ -201,7 +203,7 @@ const OrderPopup = () => {
             />
             ปลายทาง
           </label>
-          <label>
+          <label className='cc'>
             <input
               type="radio"
               value="bank_transfer"

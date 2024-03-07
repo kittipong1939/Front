@@ -48,18 +48,16 @@ export default function ManagementProduct() {
 
   const handleConfirmEdit = async () => {
     try {
-      // Convert price to integer
       const editedProductWithIntegerPrice = {
         ...editedProduct,
-        price: parseInt(editedProduct.price) // หรือใช้ Number(editedProduct.price)
+        price: parseInt(editedProduct.price)
       };
   
       const token = localStorage.getItem('token');
       await axios.put(`http://localhost:8889/product/${editedProduct.id}`, editedProductWithIntegerPrice, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log("Edited product:", editedProductWithIntegerPrice);
-      // Update the products state to reflect the changes
+
       const updatedProducts = products.map(product => {
         if (product.id === editedProductWithIntegerPrice.id) {
           return editedProductWithIntegerPrice;
@@ -73,9 +71,6 @@ export default function ManagementProduct() {
       console.error('Error editing product:', error);
     }
   };
-  
-  
-  
 
   const handleDeleteProduct = (productId) => {
     setDeleteConfirmation(productId);
@@ -87,22 +82,20 @@ export default function ManagementProduct() {
       await axios.delete(`http://localhost:8889/product/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log(`Deleted product with ID ${productId}`);
-      // After deleting the product, update the products state by filtering out the product with the deleted productId
+
       setProducts(products.filter(product => product.id !== productId));
-      setDeleteConfirmation(null); // Close delete confirmation window
+      setDeleteConfirmation(null);
     } catch (error) {
       console.error('Error deleting product:', error);
     }
   };
 
   const handleShowAllProducts = () => {
-    setSelectedCategory(''); // Set selected category to empty to display all products
+    setSelectedCategory('');
   };
 
   const handleAddProduct = () => {
     nav('/product');
-    console.log('Add Product clicked');
   };
 
   return (
@@ -129,6 +122,8 @@ export default function ManagementProduct() {
       {/* Add Product button */}
       <div className="add-product-button">
         <button onClick={handleAddProduct} className="add-button">Add Product</button>
+        <span style={{ marginLeft: '10px', fontFamily: 'sans-serif' }}>{products.length} products</span>
+
       </div>
       <div className="products-table">
         <table>
@@ -181,32 +176,30 @@ export default function ManagementProduct() {
         </div>
       )}
       {/* Edit Confirmation Dialog */}
-      {/* Edit Confirmation Dialog */}
-{editConfirmation && (
-  <div className="edit-confirmation" style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "5px" }}>
-    <p>Edit Product:</p>
-    <p>Product ID: {editedProduct.id}</p>
-    <div style={{ marginBottom: "10px" }}>
-      <label>Title: </label>
-      <input type="text" value={editedProduct.name} onChange={(e) => setEditedProduct({...editedProduct, name: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
-    </div>
-    <div style={{ marginBottom: "10px" }}>
-      <label>Image URL: </label>
-      <input type="text" value={editedProduct.img} onChange={(e) => setEditedProduct({...editedProduct, img: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br/>
-    </div>
-    <div style={{ marginBottom: "10px" }}>
-      <label>Detail: </label>
-      <input type="text" value={editedProduct.description} onChange={(e) => setEditedProduct({...editedProduct, description: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
-    </div>
-    <div style={{ marginBottom: "10px" }}>
-      <label>Price: </label>
-      <input type="number" value={editedProduct.price} onChange={(e) => setEditedProduct({...editedProduct, price: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
-    </div>
-    <button onClick={() => handleConfirmEdit()} className="confirm-button" style={{ marginRight: "10px", padding: "8px 20px", borderRadius: "3px", border: "none", backgroundColor: "#4CAF50", color: "white", cursor: "pointer" }}>Save</button>
-    <button onClick={() => setEditConfirmation(null)} className="cancel-button" style={{ padding: "8px 20px", borderRadius: "3px", border: "none", backgroundColor: "#f44336", color: "white", cursor: "pointer" }}>Cancel</button>
-  </div>
-)}
-
+      {editConfirmation && (
+        <div className="edit-confirmation" style={{ padding: "20px", border: "1px solid #ccc", borderRadius: "5px" }}>
+          <p>Edit Product:</p>
+          <p>Product ID: {editedProduct.id}</p>
+          <div style={{ marginBottom: "10px" }}>
+            <label>Title: </label>
+            <input type="text" value={editedProduct.name} onChange={(e) => setEditedProduct({...editedProduct, name: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
+          </div>
+          <div style={{ marginBottom: "10px" }}>
+            <label>Image URL: </label>
+            <input type="text" value={editedProduct.img} onChange={(e) => setEditedProduct({...editedProduct, img: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br/>
+          </div>
+          <div style={{ marginBottom: "10px" }}>
+            <label>Detail: </label>
+            <input type="text" value={editedProduct.description} onChange={(e) => setEditedProduct({...editedProduct, description: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
+          </div>
+          <div style={{ marginBottom: "10px" }}>
+            <label>Price: </label>
+            <input type="number" value={editedProduct.price} onChange={(e) => setEditedProduct({...editedProduct, price: e.target.value})} style={{ width: "100%", padding: "5px", borderRadius: "3px", border: "1px solid #ccc" }}/><br />
+          </div>
+          <button onClick={() => handleConfirmEdit()} className="confirm-button" style={{ marginRight: "10px", padding: "8px 20px", borderRadius: "3px", border: "none", backgroundColor: "#4CAF50", color: "white", cursor: "pointer" }}>Save</button>
+          <button onClick={() => setEditConfirmation(null)} className="cancel-button" style={{ padding: "8px 20px", borderRadius: "3px", border: "none", backgroundColor: "#f44336", color: "white", cursor: "pointer" }}>Cancel</button>
+        </div>
+      )}
     </div>
   );
 }

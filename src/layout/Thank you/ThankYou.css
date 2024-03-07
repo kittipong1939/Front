@@ -1,0 +1,29 @@
+/* ThankYou.css */
+
+.thank-you-container {
+    text-align: center;
+    margin: 50px auto;
+  }
+  
+  .thank-you-container h1 {
+    color: #333;
+    font-size:50px
+  }
+  
+  .thank-you-container p {
+    color: #666;
+    font-size:20px
+  }
+  .home-link {
+    font-size: 1.7em; /* กำหนดขนาดตัวอักษรใหญ่ขึ้น */
+    /* หรือคุณสามารถใช้ขนาดตัวอักษรด้วยหน่วย px, rem, หรืออื่น ๆ ตามที่คุณต้องการ */
+  }
+  
+  .thank-you-container img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    display: block; /* ทำให้รูปเป็นบล็อกเพื่อให้สามารถจัดตำแหน่งได้ง่ายขึ้น */
+    margin: 0 auto; /* จัดตำแหน่งรูปให้อยู่ตรงกลางแนวนอน */
+  }
+  

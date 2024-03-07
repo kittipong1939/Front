@@ -1,10 +1,11 @@
-/* .input,
+ /* .input,
 .input-bordered {
   background-color: #000000 !important;
   color: #fff !important; 
   border-color: #444 !important;
-}
+} */
 
 .label-text {
-  color: #000000 !important;
-} */
+    font-family: sans-serif;
+  
+} 

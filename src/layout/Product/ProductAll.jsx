@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Product/Product.css'; // Import CSS file for styling
 import { useNavigate } from 'react-router-dom';
+
 export default function AllProduct() {
+  
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0); // State เก็บราคาทั้งหมดของสินค้าในตะกร้า
   const [products, setProducts] = useState([]);
@@ -14,6 +16,13 @@ export default function AllProduct() {
   const [filteredProducts, setFilteredProducts] = useState([]); // เพิ่ม state เก็บรายการสินค้าที่ผ่านการค้นหา
   const nav = useNavigate()
   const handleToCart = async () =>{
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // Redirect user to login page
+      alert('Please login')
+      window.location.href = '/login';
+      return;
+    }
     nav('/new');
   };  
   useEffect(() => {
@@ -59,6 +68,7 @@ export default function AllProduct() {
 
   //กดซื้อ
   const handleBuyProduct = (productId) => {
+    
     setBuyConfirmation(productId);
     document.querySelector('.overlay').classList.add('active');
     console.log(`Buying product with ID ${productId}`);
@@ -112,8 +122,15 @@ export default function AllProduct() {
   };
   const handleAddToCart1 = async () => {
     try {
+      
       const token = localStorage.getItem('token');
       // สร้าง payload สำหรับการ POST request
+      if (!token) {
+        // Redirect user to login page
+        alert('Please login')
+        window.location.href = '/login';
+        return;
+      }
       const payload = {
         cartId: 1, // ตั้งค่า cartId ตามที่ต้องการ
         productId: BuyConfirmation, // ใช้ BuyConfirmation ที่เก็บ ID ของสินค้าที่ต้องการซื้อ
@@ -134,6 +151,15 @@ export default function AllProduct() {
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem('token');
+      
+      // Check if token exists
+      if (!token) {
+        // Redirect user to login page
+        alert('Please login')
+        window.location.href = '/login';
+        return;
+      }
+
       const maxQuantity = 3;
       console.log(token);
   
@@ -173,9 +199,11 @@ export default function AllProduct() {
       setAddConfirmation(true);
     } catch (error) {
       console.error('Error adding to cart:', error);
-      setAddConfirmation(false);
+      setAddConfirmation(false);  
+      
     }
-  };
+};
+
   
   
   
@@ -264,7 +292,7 @@ export default function AllProduct() {
               </div>
               
             </div>
-          ))}
+          ))}<br/><br/>
           <button className="add-to-cart-button" onClick={handleAddToCart}>Add Cart</button>
           <button className="view-cart-button" onClick={handleToCart}>View Cart</button>
 
